@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<list>
+	<operation>
+		<database> TestData </database>
+		<table> tescik </table>
+		<method> add </method>
+		<numer> 1 </numer>
+		<test> Ala ma kota</test>
+	</operation>
+
+
+	<operation>
+		<database> TestData </database>
+		<table> tescik </table>
+		<method> get </method>
+		<numer></numer>
+		<test></test>
+	</operation>
+	
+	<operation>
+		<database> TestData </database>
+		<table> tescik </table>
+		<method> find </method>
+		<numer> 2 </numer>
+		<test> Ala ma kota</test>
+	</operation>
+
+	<operation>
+		<database> TestData </database>
+		<table> tescik </table>
+		<method> delete </method>
+		<numer> 1 </numer>
+		<test> Ala ma kota</test>
+	</operation>
+	
+</list>
