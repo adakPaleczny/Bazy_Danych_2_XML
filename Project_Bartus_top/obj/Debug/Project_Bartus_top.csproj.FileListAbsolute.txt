@@ -1,0 +1,10 @@
+C:\Users\Administrator\source\repos\Project_Bartus_top\bin\Debug\Project_Bartus_top.exe.config
+C:\Users\Administrator\source\repos\Project_Bartus_top\bin\Debug\Project_Bartus_top.exe
+C:\Users\Administrator\source\repos\Project_Bartus_top\bin\Debug\Project_Bartus_top.pdb
+C:\Users\Administrator\source\repos\Project_Bartus_top\obj\Debug\Project_Bartus_top.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\Project_Bartus_top\obj\Debug\Project_Bartus_top.Properties.Resources.resources
+C:\Users\Administrator\source\repos\Project_Bartus_top\obj\Debug\Project_Bartus_top.csproj.GenerateResource.cache
+C:\Users\Administrator\source\repos\Project_Bartus_top\obj\Debug\Project_Bartus_top.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\Project_Bartus_top\obj\Debug\Project_Bartus_top.exe
+C:\Users\Administrator\source\repos\Project_Bartus_top\obj\Debug\Project_Bartus_top.pdb
+C:\Users\Administrator\source\repos\Project_Bartus_top\obj\Debug\Project_Bartus_top.Form.resources
