@@ -6,3 +6,9 @@
     * Na poczatku
 * Usuwanie całych tabel
 * Znajdowanie atrybutów tabeli
+
+## Dzialajace metody:
+* Dodawanie z pliku
+* Wyswietlanie atrybutow
+* Wyswietlanie xml bez formatowania
+* Usuwanie tabeli
