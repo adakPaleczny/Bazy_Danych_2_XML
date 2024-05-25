@@ -50,6 +50,11 @@ namespace Project_Bartus_top
             return textBox3.Text;
         }
 
+        private string getNewValeu()
+        {
+            return textBox5.Text;
+        }
+
         private int getNumber()
         {
             int num = -1;
@@ -78,7 +83,35 @@ namespace Project_Bartus_top
 
         private void Delete_element_Click(object sender, EventArgs e)
         {
-            writeToDataStreamer(getElementName());        
+            SqlConnection con = connectToDatabase();
+            try
+            {
+                if (!checkIfTableExist(getTableName()))
+                {
+                    throw new Exception("Table doesn't exist");
+                }
+
+                // Execute stored procedure to get XML content
+                using (SqlCommand command2 = new SqlCommand("DeleteValues", con))
+                {
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.Parameters.AddWithValue("@TABLE", getTableName());
+                    command2.Parameters.AddWithValue("@ATTRIBUTE", getElementName());
+                    command2.Parameters.AddWithValue("@VALUE", getValue());
+
+                    int rowsAffected = command2.ExecuteNonQuery();
+                    writeToDataStreamer("Element added");
+
+                }
+            }
+            catch(Exception ex)
+            {
+                writeToDataStreamer(ex.Message.ToString());
+            }
+            finally
+            {
+                disconnectToDatabase(con);
+            }
         }
 
         private void Wypisz_Click(object sender, EventArgs e)
@@ -243,5 +276,158 @@ namespace Project_Bartus_top
             }
 
         }
+
+        private void Add_atribute_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = connectToDatabase();
+            try
+            {
+                if (!checkIfTableExist(getTableName()))
+                {
+                    throw new Exception("Table doesn't exist");
+                }
+
+                // Execute stored procedure to get XML content
+                using (SqlCommand command2 = new SqlCommand("InsertEndXml", con))
+                {
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.Parameters.AddWithValue("@TableName", getTableName());
+                    command2.Parameters.AddWithValue("@ElementName", getElementName());
+                    command2.Parameters.AddWithValue("@Value", getValue());
+
+                    int rowsAffected = command2.ExecuteNonQuery();
+                    writeToDataStreamer("Element added");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                writeToDataStreamer(ex.Message.ToString());
+            }
+            finally
+            {
+                disconnectToDatabase(con);
+            }
+        }
+
+        private void Add_element_by_name_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = connectToDatabase();
+            try
+            {
+                if (!checkIfTableExist(getTableName()))
+                {
+                    throw new Exception("Table doesn't exist");
+                }
+
+                // Execute stored procedure to get XML content
+                using (SqlCommand command2 = new SqlCommand("InsertIndexXml", con))
+                {
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.Parameters.AddWithValue("@TableName", getTableName());
+                    command2.Parameters.AddWithValue("@ElementName", getElementName());
+                    command2.Parameters.AddWithValue("@Value", getValue());
+                    command2.Parameters.AddWithValue("@Number", getNumber());
+
+                    int rowsAffected = command2.ExecuteNonQuery();
+                    writeToDataStreamer("Element added");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                writeToDataStreamer(ex.Message.ToString());
+            }
+            finally
+            {
+                disconnectToDatabase(con);
+            }
+        }
+
+        private void Find_element_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = connectToDatabase();
+            try
+            {
+                if (!checkIfTableExist(getTableName()))
+                {
+                    throw new Exception("Table doesn't exist");
+                }
+
+                // Execute stored procedure to get XML content
+                using (SqlCommand command2 = new SqlCommand("FindInTableXML", con))
+                {
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.Parameters.AddWithValue("@TableName", getTableName());
+                    command2.Parameters.AddWithValue("@Attribute", getElementName());
+                    command2.Parameters.AddWithValue("@Value", getValue());
+
+                    SqlDataReader reader= command2.ExecuteReader();
+
+                    data_streamer.Clear();
+                    bool found = false;
+                    while (reader.Read())
+                    {
+                        if(reader["ElementExists"].ToString() == "True")
+                        {
+                            data_streamer.Text += reader["XmlContent"] + "\n";
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                    {
+                        writeToDataStreamer("Element doesn't exist in XML");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                writeToDataStreamer(ex.Message.ToString());
+            }
+            finally
+            {
+                disconnectToDatabase(con);
+            }
+        }
+
+        private void Replace_value_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = connectToDatabase();
+            try
+            {
+                if (!checkIfTableExist(getTableName()))
+                {
+                    throw new Exception("Table doesn't exist");
+                }
+
+                // Execute stored procedure to get XML content
+                using (SqlCommand command2 = new SqlCommand("ReplaceXML", con))
+                {
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.Parameters.AddWithValue("@TABLE", getTableName());
+                    command2.Parameters.AddWithValue("@ATTRIBUTE", getElementName());
+                    command2.Parameters.AddWithValue("@VALUE", getValue());
+                    command2.Parameters.AddWithValue("@NEWVALUE", getNewValeu());
+
+                    int rowsAffected = command2.ExecuteNonQuery();
+                    writeToDataStreamer("Modified");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                writeToDataStreamer(ex.Message.ToString());
+            }
+            finally
+            {
+                disconnectToDatabase(con);
+            }
+        }
+
+
     }
 }

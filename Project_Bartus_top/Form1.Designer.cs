@@ -48,6 +48,8 @@ namespace Project_Bartus_top
             this.data_streamer = new System.Windows.Forms.RichTextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.Number = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Delete_element
@@ -70,6 +72,7 @@ namespace Project_Bartus_top
             this.Find_element.TabIndex = 1;
             this.Find_element.Text = "Find element";
             this.Find_element.UseVisualStyleBackColor = true;
+            this.Find_element.Click += new System.EventHandler(this.Find_element_Click);
             // 
             // Add_file
             // 
@@ -91,6 +94,7 @@ namespace Project_Bartus_top
             this.Replace_value.TabIndex = 3;
             this.Replace_value.Text = "Replace value";
             this.Replace_value.UseVisualStyleBackColor = true;
+            this.Replace_value.Click += new System.EventHandler(this.Replace_value_Click);
             // 
             // Add_atribute
             // 
@@ -101,6 +105,7 @@ namespace Project_Bartus_top
             this.Add_atribute.TabIndex = 4;
             this.Add_atribute.Text = "Add element to first";
             this.Add_atribute.UseVisualStyleBackColor = true;
+            this.Add_atribute.Click += new System.EventHandler(this.Add_atribute_Click);
             // 
             // Delete_table
             // 
@@ -206,6 +211,7 @@ namespace Project_Bartus_top
             this.Add_element_by_name.TabIndex = 15;
             this.Add_element_by_name.Text = "Add element by name";
             this.Add_element_by_name.UseVisualStyleBackColor = true;
+            this.Add_element_by_name.Click += new System.EventHandler(this.Add_element_by_name_Click);
             // 
             // data_streamer
             // 
@@ -219,7 +225,7 @@ namespace Project_Bartus_top
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(869, 25);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 22);
             this.textBox4.TabIndex = 17;
@@ -234,11 +240,29 @@ namespace Project_Bartus_top
             this.Number.TabIndex = 18;
             this.Number.Text = "Number";
             // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(869, 74);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 22);
+            this.textBox5.TabIndex = 19;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(763, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 17);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "New Value";
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 534);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBox5);
             this.Controls.Add(this.Number);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.data_streamer);
@@ -289,6 +313,8 @@ namespace Project_Bartus_top
         private System.Windows.Forms.RichTextBox data_streamer;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label Number;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label4;
     }
 }
 
