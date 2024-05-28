@@ -15,7 +15,7 @@ BEGIN
 
         -- Modify the XML by deleting elements that contain the specified value in the specified attribute
         SET @xdoc.modify(''delete /list/'+@TABLE+'[' + @ATTRIBUTE + '[contains(., sql:variable("@VALUE"))]]'');
-
+		SET @xdoc.modify(''insert text{" " } into (/list)[1]'');
         -- Update the XmlData table directly in the dynamic SQL
         UPDATE XmlData
         SET XmlContent = @xdoc
@@ -27,6 +27,14 @@ BEGIN
     EXEC sp_executesql @sql, 
                        N'@xmlContent XML, @TABLE NVARCHAR(MAX), @VALUE NVARCHAR(MAX)', 
                        @xdoc, @TABLE, @VALUE;
+
+	-- Check if stays only <list></list>
+	DECLARE @Xml XML;
+	SELECT @Xml = XmlContent FROM XmlData WHERE Name = @TABLE;
+
+	IF(@Xml.exist('//list/*') = 0) BEGIN
+		DELETE FROM XmlData WHERE Name = @TABLE;
+	END
 END;
 GO
 
@@ -34,7 +42,7 @@ GO
 EXEC DeleteValues
     @TABLE = 'student',
     @ATTRIBUTE = 'imie',
-    @VALUE = 'Adam';
+    @VALUE = 'Marian';
 GO
 
 -- Check the result

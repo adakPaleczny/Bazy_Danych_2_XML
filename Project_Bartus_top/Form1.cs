@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Xml;
 using System.Xml.Schema;
+using System.Xml.Linq;
 
 namespace Project_Bartus_top
 {
@@ -100,7 +101,15 @@ namespace Project_Bartus_top
                     command2.Parameters.AddWithValue("@VALUE", getValue());
 
                     int rowsAffected = command2.ExecuteNonQuery();
-                    writeToDataStreamer("Element added");
+                    if(rowsAffected == 0)
+                    {
+                        writeToDataStreamer("Element did not exist");
+                    }
+                    else
+                    {
+                        writeToDataStreamer("Element deleted: " + rowsAffected);
+                    }
+                    
 
                 }
             }
@@ -134,7 +143,9 @@ namespace Project_Bartus_top
                     {
                         while (datareader2.Read())
                         {
-                            writeToDataStreamer(datareader2["XmlContent"].ToString());
+                            string receivedXML = datareader2["XmlContent"].ToString();
+                            XDocument xdoc = XDocument.Parse(receivedXML);
+                            writeToDataStreamer(xdoc.ToString());
                         }
                     }
 
@@ -157,7 +168,42 @@ namespace Project_Bartus_top
 
         private void Save_to_file_Click(object sender, EventArgs e)
         {
-            // Spytać Bartka jak działa ta funkcja do formatowania i zapisać z funkcji Wypisz_Click()
+            SqlConnection con = connectToDatabase();
+            try
+            {
+                if (!checkIfTableExist(getTableName()))
+                {
+                    throw new Exception("Table doesn't exist in database");
+                }
+
+                // Execute stored procedure to get XML content
+                using (SqlCommand command2 = new SqlCommand("GetXmlTable", con))
+                {
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.Parameters.AddWithValue("@TableName", getTableName());
+
+                    using (SqlDataReader datareader2 = command2.ExecuteReader())
+                    {
+                        while (datareader2.Read())
+                        {
+                            string receivedXML = datareader2["XmlContent"].ToString();
+                            XDocument xdoc = XDocument.Parse(receivedXML);
+                            string fileName = getTableName() + ".xml";
+                            xdoc.Save(fileName);
+                            writeToDataStreamer("Saved to file " + getTableName());
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                writeToDataStreamer(ex.Message.ToString());
+            }
+            finally
+            {
+                disconnectToDatabase(con);
+            }
         }
 
         private void Find_atributes_Click(object sender, EventArgs e)
@@ -214,7 +260,7 @@ namespace Project_Bartus_top
                     command2.Parameters.AddWithValue("@Name", getTableName());
 
                     int rowsAffected = command2.ExecuteNonQuery();
-                    writeToDataStreamer($"Rows affected: {rowsAffected}");
+                    writeToDataStreamer($"Deleted XML");
 
                 }
             }
@@ -331,7 +377,14 @@ namespace Project_Bartus_top
                     command2.Parameters.AddWithValue("@Number", getNumber());
 
                     int rowsAffected = command2.ExecuteNonQuery();
-                    writeToDataStreamer("Element added");
+                    if (rowsAffected == -1)
+                    {
+                        writeToDataStreamer("Element did not exist");
+                    }
+                    else
+                    {
+                        writeToDataStreamer("Element added to row: " + rowsAffected);
+                    }
 
                 }
 
@@ -372,7 +425,8 @@ namespace Project_Bartus_top
                     {
                         if(reader["ElementExists"].ToString() == "True")
                         {
-                            data_streamer.Text += reader["XmlContent"] + "\n";
+                            XDocument xdoc = XDocument.Parse(reader["XmlContent"].ToString());
+                            data_streamer.Text += xdoc.ToString() + "\n";
                             found = true;
                         }
                     }

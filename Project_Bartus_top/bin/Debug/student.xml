@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<list>
+  <student>
+    <imie>Adam</imie>
+    <nazwisko> Paleczny </nazwisko>
+    <wiek> 22 </wiek>
+  </student>
+  <student>
+    <imie> Marian </imie>
+    <nazwisko> Kanik </nazwisko>
+    <wiek> 32 </wiek>
+  </student>
+</list>

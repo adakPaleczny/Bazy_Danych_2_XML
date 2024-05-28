@@ -1,14 +1,14 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <list>
-	<praca>
-		<nazwa> Malarze.com </nazwa>
-		<adres> Waleczna 12 </adres>
-		<liczba_pracownikow> 3 </liczba_pracownikow>
-	</praca>
-
-	<praca>
-		<nazwa> Kolanko </nazwa>
-		<adres> Miziowo 32 </adres>
-		<liczba_pracownikow> 33 </liczba_pracownikow>
-	</praca>
+  <praca>
+    <nazwa> Malarze.com </nazwa>
+    <adres> Waleczna 12 </adres>
+    <liczba_pracownikow> 3 </liczba_pracownikow>
+  </praca>
+  <praca>
+    <nazwa> Kolanko </nazwa>
+    <adres> Miziowo 32 </adres>
+    <liczba_pracownikow> 33 </liczba_pracownikow>
+    <kolor>rozowy</kolor>
+  </praca>
 </list>
