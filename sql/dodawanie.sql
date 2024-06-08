@@ -16,6 +16,7 @@ BEGIN
 
     -- Insert XML data from the specified file into the XmlData table
     SET @SQL = '
+		DELETE FROM XmlData WHERE Name = ''' + @TableName + '''
         INSERT INTO XmlData (Name, XmlContent)
         SELECT ''' + @TableName + ''', XmlContent
         FROM OPENROWSET(
@@ -30,9 +31,9 @@ GO
 
 
 -- Example usage
-EXECUTE AddXMLToDB 'praca.xml', 'C:\Users\Administrator\Desktop\BD2\projekt\';
+EXECUTE AddXMLToDB 'student.xml', 'C:\Users\Administrator\Desktop\BD2\projekt\';
 GO
 
 SELECT * FROM XmlData;
 
-DELETE FROM XmlData WHERE Name = 'praca';
+DELETE FROM XmlData WHERE Name = 'student';
