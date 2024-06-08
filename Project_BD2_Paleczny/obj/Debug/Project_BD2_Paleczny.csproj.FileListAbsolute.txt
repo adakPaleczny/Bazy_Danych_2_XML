@@ -1,0 +1,10 @@
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\bin\Debug\Project_Bartus_top.exe.config
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\bin\Debug\Project_Bartus_top.exe
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\bin\Debug\Project_Bartus_top.pdb
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\obj\Debug\Project_BD2_Paleczny.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\obj\Debug\Project_Bartus_top.Form.resources
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\obj\Debug\Project_Bartus_top.Properties.Resources.resources
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\obj\Debug\Project_BD2_Paleczny.csproj.GenerateResource.cache
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\obj\Debug\Project_BD2_Paleczny.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\obj\Debug\Project_Bartus_top.exe
+C:\Users\Administrator\source\repos\Project_BD2_Paleczny\obj\Debug\Project_Bartus_top.pdb
