@@ -482,6 +482,44 @@ namespace Project_Bartus_top
             }
         }
 
+        private void Delete_subtree_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = connectToDatabase();
+            try
+            {
+                if (!checkIfTableExist(getTableName()))
+                {
+                    throw new Exception("Table doesn't exist");
+                }
 
+                // Execute stored procedure to get XML content
+                using (SqlCommand command2 = new SqlCommand("DeleteSubtree", con))
+                {
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.Parameters.AddWithValue("@TableName", getTableName());
+                    command2.Parameters.AddWithValue("@Number", getNumber());
+
+                    int rowsAffected = command2.ExecuteNonQuery();
+                    if (rowsAffected == 0)
+                    {
+                        writeToDataStreamer("Element did not exist");
+                    }
+                    else
+                    {
+                        writeToDataStreamer("Element deleted: " + rowsAffected);
+                    }
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                writeToDataStreamer(ex.Message.ToString());
+            }
+            finally
+            {
+                disconnectToDatabase(con);
+            }
+        }
     }
 }
